@@ -1,0 +1,124 @@
+/* UNIVERSAL STYLES */
+
+.App {
+  margin: 2em;
+}
+
+ul li {
+  list-style: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button-container a {
+  padding: 1em;
+  border: none;
+  font-size: 0.9em;
+  border-radius: 1em;
+  margin: 1em;
+  background-color: whiteSmoke;
+  cursor: pointer;
+}
+
+
+/* GRID AREA */
+.grid {
+  display: grid;
+  height: 100vh;
+  width: 100%;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 4em 4em 1fr;
+  grid-template-areas:
+    "saved-deals saved-deals"
+    "search-inputs search-inputs"
+    "property-listings calcs-graphs"
+}
+
+.saved-deals{
+  grid-area: saved-deals;
+  background-color: #ADD8E6;
+}
+
+.search-inputs {
+  grid-area: search-inputs;
+}
+
+.property-listings{
+  grid-area: property-listings;
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+}
+
+.calcs-graphs{
+  grid-area: calcs-graphs;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner {
+    text-align: center;
+}
+
+
+/* SEARCH RESULTS */
+.search-result {
+  display: flex;
+  position: relative;
+  max-width: 100%;
+  min-height: 10em;
+  background: #f6f6f6;
+  border-radius: 2px;
+  transition: 0.1s;
+  box-shadow: 0 3px 3px -3px rgba(0,0,0,.3);
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+.search-result:hover{
+  transform: scale(1.01);
+  box-shadow: 0 6px 6px -6px rgba(0,0,0,.3);
+}
+
+.search-result-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1em;
+}
+.search-result-info span {
+
+ margin: 0.5em 0 0.5em 0;
+}
+
+.search-result-info .title {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.search-result img {
+  min-width: 10em;
+  height: auto;
+}
+
+.sale {
+  background-color: red;
+}
+
+.rent {
+  background-color: blue;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
