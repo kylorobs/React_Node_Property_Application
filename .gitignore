@@ -3,6 +3,12 @@ node_modules
 backend/hidden.js
 backend/.env
 
+/backend/node_modules
+
+backend/elasticSearch/json_docs
+
+client/node_modules
+
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 !client/

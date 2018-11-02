@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "d3": "^5.7.0",
     "dotenv": "^6.1.0",
+    "nvd3": "^1.8.6",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-faux-dom": "^4.2.0",
     "react-scripts": "2.0.5",
     "whatwg-fetch": "^3.0.0"
   },

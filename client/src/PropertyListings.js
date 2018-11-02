@@ -16,6 +16,8 @@ class PropertyListings extends React.Component{
       listingsData : [],
       category:'for-sale',
       isLoading: false,
+      apiKEY: null,
+      apiID: null
     }
     this.changeCategory = this.changeCategory.bind(this);
     this.fetchProperties = this.fetchProperties.bind(this);
@@ -27,14 +29,19 @@ class PropertyListings extends React.Component{
     this.fetchProperties();
   }
 
+
+
   fetchProperties(){
     this.setState({ isLoading: true })
     let currentCategory = this.state.category;
-    // const URL = process.env.AZUNA_URL;
-     const ID = process.env.AZUNA_ID;
-     console.log("The ID is " + ID);
+    let id = this.state.apiID;
+    let key = this.state.apiKEY
+
+
+    console.log("Fetched data: " + id);
+
     // const KEY = process.env.AZUNA_KEY;
-    const constructedURL = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=${this.state.category}&app_id=2bf9897c&app_key=4319eeae9ae1d36f868e30a7efd416b8`;
+    const constructedURL = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=${this.state.category}&app_id=${this.state.apiID}&app_key=${this.state.apiKEY}`;
     console.log("URL " + constructedURL);
     console.log("current category= " + currentCategory)
 
@@ -57,7 +64,13 @@ class PropertyListings extends React.Component{
   }
 
   componentDidMount(){
-    this.fetchProperties();
+    fetch('/api/keys').then(res => res.json()).then((results) => {
+      let azunaId = results.azunaId;
+      let azunaKey = results.azunaKey;
+      console.log(azunaKey)
+      this.setState({apiKEY: azunaKey, apiID: azunaId})
+    });
+
   }
 
 

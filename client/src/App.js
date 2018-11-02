@@ -3,6 +3,7 @@ import './App.css';
 import Banner from './Banner.js'
 import DealFetcher from './DealFetcher.js'
 import PropertyListings from './PropertyListings.js'
+import InfoCalcs from './InfoCalcs.js'
 
 class App extends Component {
   constructor(props){
@@ -27,6 +28,7 @@ class App extends Component {
               <PropertyListings />
             </div>
             <div className="calcs-graphs">
+              <InfoCalcs />
               <DealFetcher  />
             </div>
           </div>
