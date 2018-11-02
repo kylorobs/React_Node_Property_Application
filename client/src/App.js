@@ -4,6 +4,8 @@ import Banner from './Banner.js'
 import DealFetcher from './DealFetcher.js'
 import PropertyListings from './PropertyListings.js'
 import InfoCalcs from './InfoCalcs.js'
+import Calculations from './calculations/Calculations.js'
+import AreaInfo from './AreaInfo.js'
 
 class App extends Component {
   constructor(props){
@@ -27,9 +29,15 @@ class App extends Component {
               <h3>Current property listings </h3>
               <PropertyListings />
             </div>
-            <div className="calcs-graphs">
-              <InfoCalcs />
+            <div className="calcs">
+  
+              <Calculations />
+            </div>
+            <div className="area-info">
               <DealFetcher  />
+            </div>
+            <div className="charts">
+              <AreaInfo  />
             </div>
           </div>
       </div>

@@ -10,6 +10,7 @@
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-faux-dom": "^4.2.0",
+    "react-nvd3": "^0.5.7",
     "react-scripts": "2.0.5",
     "whatwg-fetch": "^3.0.0"
   },

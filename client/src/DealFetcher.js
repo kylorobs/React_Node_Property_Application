@@ -35,7 +35,7 @@ class DealFetcher extends React.Component{
     let state = this.state.figures
     console.log(state)
     return (
-      <div>
+      <div className="area-info">
         {this.state.figures}
         {this.state.error}
       </div>

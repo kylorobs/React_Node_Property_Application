@@ -29,12 +29,13 @@ ul li {
   display: grid;
   height: 100vh;
   width: 100%;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 4em 4em 1fr;
+  grid-template-columns: 1.5fr 2fr 2fr;
+  grid-template-rows: 4em 4em 1fr 1fr;
   grid-template-areas:
-    "saved-deals saved-deals"
-    "search-inputs search-inputs"
-    "property-listings calcs-graphs"
+    "saved-deals saved-deals saved-deals"
+    "search-inputs search-inputs search-inputs"
+    "property-listings area-info calcs"
+    "property-listings charts charts"
 }
 
 .saved-deals{
@@ -55,8 +56,24 @@ ul li {
   overflow: scroll;
 }
 
-.calcs-graphs{
-  grid-area: calcs-graphs;
+.charts{
+  grid-area: charts;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.area-info {
+  background-color: blue;
+  grid-area: area-info;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calcs {
+  background-color: red;
+  grid-area: calcs;
   display: flex;
   flex-direction: column;
   align-items: center;
