@@ -34,10 +34,10 @@ class PropertyListings extends React.Component{
   fetchProperties(){
     this.setState({ isLoading: true })
     let currentCategory = this.state.category;
-    let city = this.props.city
-    let endpoint = `/api/city-listings/${city}/${currentCategory}`;
-    
-    // const constructedURL = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=${this.state.category}&app_id=${this.state.apiID}&app_key=${this.state.apiKEY}`;
+    let city = this.props.city;
+    let type = this.props.type;
+    let endpoint = `/api/city-listings/${city}/${currentCategory}/${type}`;
+
     console.log("current category= " + currentCategory)
 
     fetch(endpoint)

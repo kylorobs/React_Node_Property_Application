@@ -14,8 +14,9 @@ class AreaStats extends React.Component{
   }
 
   fetchSales(){
-    let city = this.props.city
-    let endpoint = `/api/city-listings/${city}/for-sale`;
+    let city = this.props.city;
+    let type = this.props.type;
+    let endpoint = `/api/city-listings/${city}/for-sale/${type}`;
     fetch(endpoint)
     .then(res => res.json())
     .then(results => {
@@ -27,38 +28,58 @@ class AreaStats extends React.Component{
   }
 
   fetchRents(){
-    let city = this.props.city
-    let endpoint = `/api/city-listings/${city}/to-rent`;
+    let city = this.props.city;
+      let type = this.props.type;
+    let endpoint = `/api/city-listings/${city}/to-rent/${type}`;
     fetch(endpoint)
     .then(res => res.json())
     .then(results => {
       let rents = results.results;
       this.setState({rents: rents})
-      console.log("Total rents in state: " + this.state.rents)
+      console.log(this.state.rents)
     })
     .catch(err => console.log("Error fetching" + err))
   }
 
   findAverage(array){
-    if (array){
+    if (!array){
+      console.log("No array provided");
+      return
+    }
+
+    else if (array === 0){
+      console.log("There is no data in array")
+      return "No data"
+    }
+
+    else {
+      console.log("finding array: " + array)
     return array.reduce(function(a, b){
         return a + b;
       })/ array.length;
-    }
-    else {
-        console.log("empty array")
       }
   }
 
   getAveragePrices(data, beds){
     let bedsPrices;
-    console.log("av function received data: " + data);
-    let bedsArray = data.filter(item => {
+    let findBeds = data.find(item => {
       return item.beds === beds;
     })
+
+    if (!findBeds){
+      return "No data!"
+    }
+
+    console.log("av function received data: " + data);
+    let bedsArray = data.filter(item => {
+      if (item.beds)
+      {return item.beds === beds;}
+    })
+
     if (data === this.state.sales){
       bedsPrices = bedsArray.map((item, index) => {
-        return item.sale_price;
+        if (item.sale_price)
+        {return item.sale_price;}
       })
     }
     else if (data === this.state.rents){
@@ -100,8 +121,11 @@ class AreaStats extends React.Component{
     let threebedrent = message;
     let fourbedsale = message;
     let fourbedrent = message;
+    let fivebedrent = message;
+      let fivebedsale = message;
 
-    if (sales && rents){
+
+    if (rents && sales){
           onebedsale= this.getAveragePrices(sales, 1)
           onebedrent = this.getAveragePrices(rents, 1)
           twobedsale = this.getAveragePrices(sales, 2)
@@ -110,6 +134,8 @@ class AreaStats extends React.Component{
           threebedrent = this.getAveragePrices(rents,3)
           fourbedsale = this.getAveragePrices(sales, 4)
           fourbedrent = this.getAveragePrices(rents, 4)
+          fivebedsale = this.getAveragePrices(sales, 5)
+          fivebedrent = this.getAveragePrices(rents, 5)
     }
 
     return (
@@ -142,6 +168,11 @@ class AreaStats extends React.Component{
               <td> 4 bed</td>
               <td> {fourbedrent}</td>
               <td> {fourbedsale} </td>
+            </tr>
+            <tr>
+              <td> 5 bed</td>
+              <td> {fivebedrent}</td>
+              <td> {fivebedsale} </td>
             </tr>
           </table>
           </div>

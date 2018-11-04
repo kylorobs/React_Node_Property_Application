@@ -69,12 +69,13 @@ router.post('/deals/', (req, res) => {
 
 
 //GET REQUEST MADE TO ADUNA API
-router.get('/city-listings/:city/:category/:beds?', (req, res) => {
+router.get('/city-listings/:city/:category/:type/:beds?', (req, res) => {
   var city = req.params.city;
   var category = req.params.category;
   var beds = req.params.beds;
+  var type = req.params.type
 
-  const promise = getAdunaListing(city, category, beds)
+  const promise = getAdunaListing(city, category, type, beds)
   console.log(util.inspect(promise))
 
 promise.then(data =>{
