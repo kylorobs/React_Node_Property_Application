@@ -1,9 +1,9 @@
 var client = require('./elasticConnection.js');
 
-function getBournemouth(){
+function getBournemouth(city){
   const promise = new Promise((resolve, reject) => {
     client.search({
-      index: 'bournemouth',
+      index: city,
       type: 'property_sales',
       body: {
         sort : [

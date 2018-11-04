@@ -5,7 +5,7 @@ import NVD3Chart from "react-nvd3";
 
 
 
-class AreaInfo extends React.Component{
+class Chart extends React.Component{
   constructor(props){
     super(props)
       this.state = {
@@ -24,7 +24,7 @@ class AreaInfo extends React.Component{
   }
 
 componentDidMount(){
-  fetch('/api/bournemouth')
+  fetch('/api/city-data/bournemouth')
   .then(res => res.json()).then(results => {
     console.log(results.data)
 
@@ -66,4 +66,4 @@ componentDidMount(){
 
 }
 
-export default AreaInfo;
+export default Chart;

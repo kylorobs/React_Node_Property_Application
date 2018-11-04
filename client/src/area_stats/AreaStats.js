@@ -14,8 +14,9 @@ class AreaStats extends React.Component{
   }
 
   fetchSales(){
-    let url = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=for-sale&app_id=2bf9897c&app_key=4319eeae9ae1d36f868e30a7efd416b8&results_per_page=1000&where=bournemouth`;
-    fetch(url)
+    let city = this.props.city
+    let endpoint = `/api/city-listings/${city}/for-sale`;
+    fetch(endpoint)
     .then(res => res.json())
     .then(results => {
       let sales = results.results;
@@ -26,8 +27,9 @@ class AreaStats extends React.Component{
   }
 
   fetchRents(){
-    let url = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=to-rent&app_id=2bf9897c&app_key=4319eeae9ae1d36f868e30a7efd416b8&results_per_page=100&where=bournemouth`;
-    fetch(url)
+    let city = this.props.city
+    let endpoint = `/api/city-listings/${city}/to-rent`;
+    fetch(endpoint)
     .then(res => res.json())
     .then(results => {
       let rents = results.results;
@@ -72,6 +74,12 @@ class AreaStats extends React.Component{
     return Math.floor(this.findAverage(bedsPrices));
   }
 
+  // shouldComponentUpdate(){
+  //   if (this.props.city === this.props.city){
+  //     return false
+  //   }
+  // }
+
   componentWillMount(){
     this.fetchSales()
     this.fetchRents()
@@ -82,15 +90,16 @@ class AreaStats extends React.Component{
   render(){
     let sales = this.state.sales;
     let rents = this.state.rents;
+    let message = "calculating...";
 
-    let onebedsale = "calculating...";
-    let onebedrent = "calculating...";
-    let twobedsale = "calculating...";
-    let twobedrent = "calculating...";
-    let threebedsale = "calculating...";
-    let threebedrent = "calculating...";
-    let fourbedsale = "calculating...";
-    let fourbedrent = "calculating...";
+    let onebedsale = message;
+    let onebedrent = message;
+    let twobedsale = message;
+    let twobedrent = message;
+    let threebedsale = message;
+    let threebedrent = message;
+    let fourbedsale = message;
+    let fourbedrent = message;
 
     if (sales && rents){
           onebedsale= this.getAveragePrices(sales, 1)

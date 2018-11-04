@@ -34,18 +34,13 @@ class PropertyListings extends React.Component{
   fetchProperties(){
     this.setState({ isLoading: true })
     let currentCategory = this.state.category;
-    let id = this.state.apiID;
-    let key = this.state.apiKEY
-
-
-    console.log("Fetched data: " + id);
-
-    // const KEY = process.env.AZUNA_KEY;
-    const constructedURL = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=${this.state.category}&app_id=${this.state.apiID}&app_key=${this.state.apiKEY}`;
-    console.log("URL " + constructedURL);
+    let city = this.props.city
+    let endpoint = `/api/city-listings/${city}/${currentCategory}`;
+    
+    // const constructedURL = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=${this.state.category}&app_id=${this.state.apiID}&app_key=${this.state.apiKEY}`;
     console.log("current category= " + currentCategory)
 
-    fetch(constructedURL)
+    fetch(endpoint)
     .then(res => res.json()).then((data)=> {
       let properties = data.results.map((property, i) => {
         switch(property.category.tag){

@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import Banner from './Banner.js'
-import DealFetcher from './DealFetcher.js'
-import PropertyListings from './PropertyListings.js'
+import Banner from './banner/Banner.js'
+import DealFetcher from './saved_deals/DealFetcher.js'
+import PropertyListings from './property_listings/PropertyListings.js'
 import Calculations from './calculations/Calculations.js'
-import AreaInfo from './AreaInfo.js'
+import Chart from './chart/Chart.js'
 import AreaStats from './area_stats/AreaStats.js'
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      title: "Investment Deal Checker"
+      title: "Investment Deal Checker",
+      currentCity: 'bournemouth',
+      type: 'detached'
     }
   }
   render() {
@@ -27,16 +29,16 @@ class App extends Component {
             </div>
             <div className="property-listings">
               <h3>Current property listings </h3>
-              <PropertyListings />
+              <PropertyListings city={this.state.currentCity} type={this.state.type}/>
             </div>
             <div className="calcs">
               <Calculations />
             </div>
             <div className="area-info">
-              <AreaStats  />
+              <AreaStats city={this.state.currentCity} type={this.state.type} />
             </div>
             <div className="charts">
-              <AreaInfo  />
+              // <Chart  />
             </div>
           </div>
       </div>

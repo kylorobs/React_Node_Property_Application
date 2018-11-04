@@ -42,7 +42,7 @@ class AvSalePrice extends React.Component{
 
 
   componentDidMount(){
-    let url = '/api/' + this.props.city;
+    let url = '/api/city-data/' + this.props.city;
 
     fetch(url)
     .then(res=> res.json()).then(results => {

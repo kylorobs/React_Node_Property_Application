@@ -1,16 +1,15 @@
-// import express from 'express';
-// import bodyParser from 'body-parser';
-// import logger from 'morgan';
-// import mongoose from 'mongoose';
+
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const Deal_Profile = require('./models/deals.js');
+const util = require('util')
 
 const getBournemouth = require('./elasticSearch/getBournemouth.js')
 const client = require('./elasticSearch/elasticConnection.js');
+const getAdunaListing = require('./api_request_functions/getAdunaListing.js');
 
 const app = express();
 const router = express.Router();
@@ -68,8 +67,32 @@ router.post('/deals/', (req, res) => {
 });
 
 
-router.get('/bournemouth', (req, res) => {
-  getBournemouth()
+
+//GET REQUEST MADE TO ADUNA API
+router.get('/city-listings/:city/:category/:beds?', (req, res) => {
+  var city = req.params.city;
+  var category = req.params.category;
+  var beds = req.params.beds;
+
+  const promise = getAdunaListing(city, category, beds)
+  console.log(util.inspect(promise))
+
+promise.then(data =>{
+    console.log(data);
+    console.log(util.inspect(data))
+    res.status(200).json(data);
+  })
+  .catch(err => {
+    res.status(500).send(err);
+    console.log("server side error " + err)
+  })
+})
+
+
+//GET REQUEST MADE TO ELASTIC SEARCH SERVER
+router.get('/city-data/:city/', (req, res) => {
+  var city = req.params.city;
+  getBournemouth(city)
   .then(data =>{
     res.status(200).json({ data });
   })
