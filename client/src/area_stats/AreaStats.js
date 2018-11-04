@@ -16,13 +16,14 @@ class AreaStats extends React.Component{
   fetchSales(){
     let city = this.props.city;
     let type = this.props.type;
-    let endpoint = `/api/city-listings/${city}/for-sale/${type}`;
+    let postcode = this.props.postcode;
+    let endpoint = `/api/city-listings/${city}/for-sale/${type}/${postcode}`;
     fetch(endpoint)
     .then(res => res.json())
     .then(results => {
       let sales = results.results;
       this.setState({sales: sales})
-      console.log("Total sales in state: " + this.state.sales)
+      // console.log("Total sales in state: " + this.state.sales)
     })
     .catch(err => console.log("Error fetching" + err))
   }
@@ -30,13 +31,14 @@ class AreaStats extends React.Component{
   fetchRents(){
     let city = this.props.city;
       let type = this.props.type;
-    let endpoint = `/api/city-listings/${city}/to-rent/${type}`;
+      let postcode = this.props.postcode;
+    let endpoint = `/api/city-listings/${city}/to-rent/${type}/${postcode}`;
     fetch(endpoint)
     .then(res => res.json())
     .then(results => {
       let rents = results.results;
       this.setState({rents: rents})
-      console.log(this.state.rents)
+      // console.log(this.state.rents)
     })
     .catch(err => console.log("Error fetching" + err))
   }
@@ -61,8 +63,8 @@ class AreaStats extends React.Component{
   }
 
   getAveragePrices(data, beds){
-    let bedsPrices;
-    let findBeds = data.find(item => {
+    let bedsPrices = [];
+    const findBeds = data.find(item => {
       return item.beds === beds;
     })
 
@@ -71,20 +73,18 @@ class AreaStats extends React.Component{
     }
 
     console.log("av function received data: " + data);
-    let bedsArray = data.filter(item => {
-      if (item.beds)
-      {return item.beds === beds;}
-    })
+    let bedsArray = data.filter(item => item.beds === beds)
 
     if (data === this.state.sales){
       bedsPrices = bedsArray.map((item, index) => {
-        if (item.sale_price)
-        {return item.sale_price;}
+        if (item.sale_price && typeof item.sale_price === 'number' &&  !Number.isNaN(item.sale_price))
+        {
+          return item.sale_price;}
       })
     }
     else if (data === this.state.rents){
       bedsPrices = bedsArray.map((item, index) => {
-        return item.price_per_month;
+            return item.price_per_month
       })
     }
 
@@ -92,14 +92,10 @@ class AreaStats extends React.Component{
       console.log("Getaverageprices function not working")
     }
 
+    bedsPrices = bedsPrices.filter(Boolean)  // REMOVE EMPTY ITEMS IN ARRAY
     return Math.floor(this.findAverage(bedsPrices));
   }
 
-  // shouldComponentUpdate(){
-  //   if (this.props.city === this.props.city){
-  //     return false
-  //   }
-  // }
 
   componentWillMount(){
     this.fetchSales()
@@ -142,6 +138,7 @@ class AreaStats extends React.Component{
         <div>
           <h2> {this.props.city} </h2>
           <h4> Property type: {this.props.type} </h4>
+          <h4> Postcode: {this.props.postcode} </h4>
           <div className="info-table">
           <table>
           <tr>
@@ -182,6 +179,3 @@ class AreaStats extends React.Component{
 }
 
 export default AreaStats
-
-
-// [{sale_price: 5}, {sale_price: 10}, {sale_price: 15}]

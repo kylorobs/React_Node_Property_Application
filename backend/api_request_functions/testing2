@@ -14,7 +14,8 @@ function getAdunaListing(city, category){
     axios.get(constructedURL).then(results => {
       console.log("axios returned results: " + results);
       return results;
-    }),function(error, response, status){
+    })
+    .catch(error => console.log("catch " + error)),function(error, response, status){
         if (error){
           console.log("fetch error: "+ error);
           reject(error);

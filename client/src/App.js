@@ -13,9 +13,11 @@ class App extends Component {
     this.state = {
       title: "Investment Deal Checker",
       currentCity: 'bournemouth',
-      type: 'detached'
+      type: 'flat',
+      postcode: 'SW15 6BB'
     }
   }
+
   render() {
     return (
       <div className="App">
@@ -29,13 +31,13 @@ class App extends Component {
             </div>
             <div className="property-listings">
               <h3>Current property listings </h3>
-              <PropertyListings city={this.state.currentCity} type={this.state.type}/>
+              <PropertyListings city={this.state.currentCity} type={this.state.type} postcode={this.state.postcode}/>
             </div>
             <div className="calcs">
-              <Calculations />
+              <Calculations  city={this.state.currentCity} type={this.state.type} postcode={this.state.postcode} />
             </div>
             <div className="area-info">
-              <AreaStats city={this.state.currentCity} type={this.state.type} />
+              <AreaStats city={this.state.currentCity} type={this.state.type} postcode={this.state.postcode}/>
             </div>
             <div className="charts">
               // <Chart  />

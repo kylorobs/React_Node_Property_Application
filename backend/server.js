@@ -7,9 +7,9 @@ const logger = require('morgan');
 const Deal_Profile = require('./models/deals.js');
 const util = require('util')
 
-const getBournemouth = require('./elasticSearch/getBournemouth.js')
 const client = require('./elasticSearch/elasticConnection.js');
 const getAdunaListing = require('./api_request_functions/getAdunaListing.js');
+const getLandRegistryData = require('./api_request_functions/getLandRegistryData.js')
 
 const app = express();
 const router = express.Router();
@@ -69,13 +69,13 @@ router.post('/deals/', (req, res) => {
 
 
 //GET REQUEST MADE TO ADUNA API
-router.get('/city-listings/:city/:category/:type/:beds?', (req, res) => {
+router.get('/city-listings/:city/:category/:type/:postcode?', (req, res) => {
   var city = req.params.city;
   var category = req.params.category;
-  var beds = req.params.beds;
   var type = req.params.type
+  var postcode = req.params.postcode;
 
-  const promise = getAdunaListing(city, category, type, beds)
+  const promise = getAdunaListing(city, category, type, postcode)
   console.log(util.inspect(promise))
 
 promise.then(data =>{
@@ -91,9 +91,12 @@ promise.then(data =>{
 
 
 //GET REQUEST MADE TO ELASTIC SEARCH SERVER
-router.get('/city-data/:city/', (req, res) => {
+router.get('/city-data/:city/:type/:postcode?', (req, res) => {
   var city = req.params.city;
-  getBournemouth(city)
+  var type = req.params.type
+  // var postcode = decodeURIComponent(req.params.postcode);
+  var postcode = req.params.postcode;
+  getLandRegistryData(city, type, postcode)
   .then(data =>{
     res.status(200).json({ data });
   })
