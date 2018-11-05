@@ -1,6 +1,6 @@
 var client = require('../elasticSearch/elasticConnection.js');
 
-function getLandRegistryData(city, postcode, type){
+function getLandRegistryData(city, type, postcode){
 
   switch(type) {
     case "detached":
@@ -29,20 +29,14 @@ function getLandRegistryData(city, postcode, type){
         sort : [
            { date : {"order" : "asc"}},
          ],
-           size: 100,
+           size: 10000,
          query: {
-           wildcard :{
-             postcode: postcode
-           },
-           wildcard :{
-             type: type
-           }
-           // bool: {
-           // must:
-
-           //   { match: { type: "T"}}
-           //
-           // }
+           bool: {
+           must: [
+           { match: { postcode: postcode}},
+            { match: { type: type}}
+          ],
+         },
          }
       }
     },function (error, response, status) {

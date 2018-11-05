@@ -10,6 +10,7 @@ const util = require('util')
 const client = require('./elasticSearch/elasticConnection.js');
 const getAdunaListing = require('./api_request_functions/getAdunaListing.js');
 const getLandRegistryData = require('./api_request_functions/getLandRegistryData.js')
+const getPropertyTypes = require('./api_request_functions/getPropertyTypes.js')
 
 const app = express();
 const router = express.Router();
@@ -90,12 +91,13 @@ promise.then(data =>{
 })
 
 
-//GET REQUEST MADE TO ELASTIC SEARCH SERVER
+//GET REQUEST MADE TO ELASTIC SEARCH FOR PRICES
 router.get('/city-data/:city/:type/:postcode?', (req, res) => {
   var city = req.params.city;
   var type = req.params.type
-  // var postcode = decodeURIComponent(req.params.postcode);
-  var postcode = req.params.postcode;
+  var postcode = decodeURIComponent(req.params.postcode);
+  console.log("postcode decoded: " + postcode)
+  // var postcode = req.params.postcode;
   getLandRegistryData(city, type, postcode)
   .then(data =>{
     res.status(200).json({ data });
@@ -103,7 +105,21 @@ router.get('/city-data/:city/:type/:postcode?', (req, res) => {
   .catch(err => {
     res.status(500).send(err);
   })
+})
 
+//GET REQUEST MADE TO ELASTIC SEARCH FOR PRICES
+router.get('/property-types/:city/:postcode', (req, res) => {
+  var city = req.params.city;
+  var postcode = decodeURIComponent(req.params.postcode);
+  console.log("postcode decoded: " + postcode)
+  // var postcode = req.params.postcode;
+  getPropertyTypes(city, postcode)
+  .then(data =>{
+    res.status(200).json({ data });
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
 })
 
 

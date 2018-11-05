@@ -16,8 +16,6 @@ class PropertyListings extends React.Component{
       listingsData : [],
       category:'for-sale',
       isLoading: false,
-      apiKEY: null,
-      apiID: null
     }
     this.changeCategory = this.changeCategory.bind(this);
     this.fetchProperties = this.fetchProperties.bind(this);

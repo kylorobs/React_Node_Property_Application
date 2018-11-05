@@ -4,8 +4,9 @@ import Banner from './banner/Banner.js'
 import DealFetcher from './saved_deals/DealFetcher.js'
 import PropertyListings from './property_listings/PropertyListings.js'
 import Calculations from './calculations/Calculations.js'
-import Chart from './chart/Chart.js'
+// import Chart from './chart/Chart.js'
 import AreaStats from './area_stats/AreaStats.js'
+import CityPicker from './city_picker/CityPicker.js'
 
 class App extends Component {
   constructor(props){
@@ -14,15 +15,35 @@ class App extends Component {
       title: "Investment Deal Checker",
       currentCity: 'bournemouth',
       type: 'flat',
-      postcode: 'SW15 6BB'
+      postcode: 'BH1%203QJ',
+      testValue : 'test'
     }
+
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(info){ //CITYPICKER WILL HAND IT AN OBJECT
+    let city = info.city;
+    let postcode = info.postcode;
+    let type = info.type;
+
+    this.setState(
+      {
+      currentCity: city,
+      type: postcode,
+      postcode: type,
+    })
+  }
+
 
   render() {
     return (
       <div className="App">
         <Banner title={this.state.title} />
           <div className="grid">
+          <div className="map">
+          <CityPicker onChange={this.handleChange} />
+          </div>
             <div className="saved-deals">
               <p> All your <strong>saved searches</strong> will be here.</p>
             </div>
@@ -40,7 +61,7 @@ class App extends Component {
               <AreaStats city={this.state.currentCity} type={this.state.type} postcode={this.state.postcode}/>
             </div>
             <div className="charts">
-              // <Chart  />
+
             </div>
           </div>
       </div>

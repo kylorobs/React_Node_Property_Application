@@ -1,5 +1,26 @@
+var client = require('../elasticSearch/elasticConnection.js');
 
-function getAdunaListing(city, category){
+function getLandRegistryData(city, type, postcode){
+
+  switch(type) {
+    case "detached":
+      type = 'D'
+    break;
+    case "semi-detached":
+      type = 'S'
+    break;
+    case "flat":
+      type = 'F'
+    break;
+    case "bungalow":
+      type = 'O'
+    break;
+    case "terraced":
+      type = 'T'
+    break;
+    default:
+    type="undefined"
+  }
   const promise = new Promise((resolve, reject) => {
     client.search({
       index: city,
@@ -8,7 +29,15 @@ function getAdunaListing(city, category){
         sort : [
            { date : {"order" : "asc"}},
          ],
-        size: 10,
+           size: 10000,
+         query: {
+           bool: {
+           must: [
+           { match: { postcode: postcode}},
+            { match: { type: type}}
+          ],
+         },
+         }
       }
     },function (error, response, status) {
         if (error){
@@ -17,10 +46,19 @@ function getAdunaListing(city, category){
         }
         else {
           data = [];
-          console.log("--- Aduna Response below, yay ---");
+          console.log("--- Response below, yay ---");
           console.log(response);
 
-          resolve(response);
+          response.hits.hits.forEach(function(hit){
+            let sale = {
+              date: hit._source.date,
+              price : hit._source.price,
+              postcode: hit._source.postcode,
+              type: hit._source.type
+            }
+            console.log(sale);
+            data.push(sale);
+            resolve(data);
           });
         }
     });
@@ -29,4 +67,4 @@ function getAdunaListing(city, category){
   return promise; // promise
 }
 
-module.exports = getBournemouth;
+module.exports = getLandRegistryData;
