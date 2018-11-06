@@ -48,10 +48,6 @@ router.get('/deals/:id?', (req, res) => {
   });
 });
 
-router.get('/keys', (req, res) => {
-  res.status(200).json({ azunaId: azunaId,
-                        azunaKey: azunaKey});
-})
 
 router.post('/deals/', (req, res) => {
   let newDeal = req.body;
@@ -70,7 +66,7 @@ router.post('/deals/', (req, res) => {
 
 
 //GET REQUEST MADE TO ADUNA API
-router.get('/city-listings/:city/:category/:type/:postcode?', (req, res) => {
+router.get('/city-listings/:city/:category/:type/:postcode', (req, res) => {
   var city = req.params.city;
   var category = req.params.category;
   var type = req.params.type
@@ -107,7 +103,7 @@ router.get('/city-data/:city/:type/:postcode?', (req, res) => {
   })
 })
 
-//GET REQUEST MADE TO ELASTIC SEARCH FOR PRICES
+//GET REQUEST MADE TO ELASTIC SEARCH FOR PROPERTY TYPES
 router.get('/property-types/:city/:postcode', (req, res) => {
   var city = req.params.city;
   var postcode = decodeURIComponent(req.params.postcode);

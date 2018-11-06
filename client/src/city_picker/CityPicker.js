@@ -1,6 +1,7 @@
 import React from 'react';
 import Map from './Map.js';
 import Filter from './Filter.js'
+import SelectedCity from './SelectedCity.js'
 
 class CityPicker extends React.Component{
   constructor(props){
@@ -32,9 +33,10 @@ class CityPicker extends React.Component{
   }
 
   submitChange(e){
+      let tempCode = 'BH1'
     let info = {
       city: this.state.selectedCity,
-      postcode: this.state.selectedPostCode,
+      postcode: tempCode,
       type : this.state.selectedType,
     }
     this.props.onChange(info)
@@ -62,7 +64,8 @@ let selectedCity = e.target.id
             <div onClick={this.cityPicker} className="circle heartbeat" id="ipswich"></div>
             <div onClick={this.cityPicker} className="circle heartbeat" id="leeds"></div>
             <div onClick={this.cityPicker} className="circle heartbeat" id="middlesbrough"></div>
-            <Filter filter={this.state.filterBox} selectedCity={this.state.selectedCity} typeChange={this.onTypeChange} cityChange={this.onCityChange} postCodeChange={this.onPostCodeChange} />
+            <Filter filter={this.state.filterBox} selectedCity={this.state.selectedCity} selectedPostCode={this.state.selectedPostCode} typeChange={this.onTypeChange} cityChange={this.onCityChange} postCodeChange={this.onPostCodeChange} />
+            <SelectedCity selectedCity={this.state.selectedCity} />
             </div>
           )
 

@@ -18,7 +18,6 @@ class PropertyListings extends React.Component{
       isLoading: false,
     }
     this.changeCategory = this.changeCategory.bind(this);
-    this.fetchProperties = this.fetchProperties.bind(this);
   }
 
   changeCategory(sale){
@@ -28,43 +27,34 @@ class PropertyListings extends React.Component{
   }
 
 
+componentDidMount(){
+  this.setState({ isLoading: true })
+  let currentCategory = this.state.category;
+  let city = this.props.city;
+  let type = this.props.type;
+  let postcode = this.props.postcode;
+  let endpoint = `/api/city-listings/${city}/${currentCategory}/${type}/${postcode}`;
 
-  fetchProperties(){
-    this.setState({ isLoading: true })
-    let currentCategory = this.state.category;
-    let city = this.props.city;
-    let type = this.props.type;
-    let endpoint = `/api/city-listings/${city}/${currentCategory}/${type}`;
+  console.log("current category= " + currentCategory)
+    console.log("property listings url= " + endpoint)
 
-    console.log("current category= " + currentCategory)
-
-    fetch(endpoint)
-    .then(res => res.json()).then((data)=> {
-      let properties = data.results.map((property, i) => {
-        switch(property.category.tag){
-          case 'for-sale':
-            return <SearchResult key={i} title={property.title} type={property.property_type} price={property.sale_price} image={property.image_url} category={this.state.category} />
-          break;
-          case 'to-rent':
-            return <SearchResult key={i} title={property.title} type={property.property_type} price={property.price_per_month} image={property.image_url} beds={property.beds} category={this.state.category} />
-          break;
-          default:
-            return <p>No properties found </p>
-        }
-      })
-      this.setState({listingsData: properties, isLoading: false})
+  fetch(endpoint)
+  .then(res => res.json()).then((data)=> {
+    let properties = data.results.map((property, i) => {
+      switch(property.category.tag){
+        case 'for-sale':
+          return <SearchResult key={i} title={property.title} type={property.property_type} price={property.sale_price} image={property.image_url} category={this.state.category} />
+        break;
+        case 'to-rent':
+          return <SearchResult key={i} title={property.title} type={property.property_type} price={property.price_per_month} image={property.image_url} beds={property.beds} category={this.state.category} />
+        break;
+        default:
+          return <p>No properties found </p>
+      }
     })
-  }
-
-  componentDidMount(){
-    fetch('/api/keys').then(res => res.json()).then((results) => {
-      let azunaId = results.azunaId;
-      let azunaKey = results.azunaKey;
-      console.log(azunaKey)
-      this.setState({apiKEY: azunaKey, apiID: azunaId})
-    });
-
-  }
+    this.setState({listingsData: properties, isLoading: false})
+  })
+}
 
 
   render(){

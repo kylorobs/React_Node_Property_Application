@@ -136,15 +136,16 @@ class AreaStats extends React.Component{
 
     return (
         <div>
-          <h2> {this.props.city} </h2>
+          <h2 className="teal"> {this.props.city} </h2>
           <h4> Property type: {this.props.type} </h4>
           <h4> Postcode: {this.props.postcode} </h4>
           <div className="info-table">
+          <span className="teal"> Calcuated averages </span>
           <table>
           <tr>
-            <th>no. beds</th>
-            <th>Av rent per month</th>
-            <th>Av sale listing price</th>
+            <th>Beds</th>
+            <th>Rent p/m</th>
+            <th>On Sale price</th>
           </tr>
             <tr>
               <td> 1 bed</td>

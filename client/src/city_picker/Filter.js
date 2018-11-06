@@ -1,18 +1,26 @@
 import React from 'react';
+import Input from '../buttons_inputs/Input.js'
+import PostCodeCheck from './PostCodeCheck.js'
 
 class Filter extends React.Component{
   constructor(props){
     super(props)
     this.onSelectorChange = this.onSelectorChange.bind(this)
+    this.onPostCodeChange = this.onPostCodeChange.bind(this)
   }
 
   onSelectorChange(e){
-    console.log("selected li is: " + e.target.innerHTML);
-    let value = e.target.innerHTML
-    value.toLowerCase();
-    this.props.cityChange(value)
+    var target = e.target;
+    console.log(target)
+    var selected = target.options[target.selectedIndex].value;
+    console.log(selected)
+    selected.toLowerCase();
+    this.props.cityChange(selected)
   }
 
+  onPostCodeChange(newPostCode){
+    this.props.postCodeChange(newPostCode)
+  }
 
 
 
@@ -20,13 +28,18 @@ class Filter extends React.Component{
 
       let result = (!this.props.filter) ? <div className="filterBoxOff"></div> :
       (<div className="filterBoxOn">
-        <ul>
-          <li onClick={this.onSelectorChange}value="bournmouth">Bournemouth</li>
-          <li onClick={this.onSelectorChange} value="london">London</li>
-          <li onClick={this.onSelectorChange} value="ipswich">Ipswich</li>
-          <li onClick={this.onSelectorChange} value="bristol">Bristol</li>
-          <li value={this.props.selectedCity} onClick={this.onSelectorChange}>{this.props.selectedCity}</li>
-        </ul>
+        <span className="heading"> Your chosen city </span>
+        <select onChange={this.onSelectorChange}>
+          <option value="bournmouth">Bournemouth</option>
+          <option  value="london">London</option>
+          <option value="ipswich">Ipswich</option>
+          <option value="bristol">Bristol</option>
+          <option value={this.props.selectedCity} selected>{this.props.selectedCity}</option>
+        </select>
+        <span className="heading"> Enter the postcode </span>
+        <Input onChange={this.onPostCodeChange}  label="Post Code" placeholder="eg SW15 6BB"  type="text"/>
+        <a className="submit"> Check postcode </a>
+        <PostCodeCheck selectedCity ={this.props.selectedCity} selectedPostCode={this.props.selectedPostCode} />
       </div>
     )
       return result

@@ -8,6 +8,36 @@ ul li {
   list-style: none;
 }
 
+table {
+  margin: auto;
+}
+
+tr {
+  color: #1c1a52;
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.5em;
+    margin: 0.5em;
+}
+
+h4 {
+  margin: 0.5em 0;
+}
+
+.teal {
+  color: teal;
+}
+
+.navy {
+  color: #1c1a52;
+}
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -29,7 +59,7 @@ ul li {
   display: grid;
   height: 100vh;
   width: 100%;
-  grid-template-columns: 1.5fr 2fr 2fr;
+  grid-template-columns: 2fr 2fr 2fr;
   grid-template-rows: 4em 4em 1fr 1fr;
   grid-template-areas:
     "saved-deals saved-deals saved-deals"
@@ -40,7 +70,8 @@ ul li {
 
 .saved-deals{
   grid-area: saved-deals;
-  background-color: #ADD8E6;
+  background-color: #1c1a52;
+  color: white;
 }
 
 .map {
@@ -63,11 +94,15 @@ ul li {
 
 .property-listings{
   grid-area: property-listings;
-  background-color: yellow;
+  background-color: #1c1a52;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: scroll;
+}
+
+.property-listings h3 {
+  color: white;
 }
 
 .charts{
@@ -78,15 +113,16 @@ ul li {
 }
 
 .area-info {
-  background-color: blue;
+  border: 15px solid #1c1a52;
+  padding: 0.5em;
   grid-area: area-info;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .calcs {
-  background-color: red;
+  background-color: #1c1a52;
+  color:white;
   grid-area: calcs;
   display: flex;
   flex-direction: column;
@@ -257,6 +293,15 @@ background-color: red;
   position: absolute;
   left: 5%;
   top: 30%
+}
+
+.selected-city {
+  position: absolute;
+  right: -1.5em;
+  top: 0.5em;
+  font-size: 3.5em;
+  color: teal;
+  font-weight:bold;
 }
 
 

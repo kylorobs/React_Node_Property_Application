@@ -15,7 +15,7 @@ class App extends Component {
       title: "Investment Deal Checker",
       currentCity: 'bournemouth',
       type: 'flat',
-      postcode: 'BH1%203QJ',
+      postcode: 'BH13QJ',
       testValue : 'test'
     }
 
@@ -30,8 +30,8 @@ class App extends Component {
     this.setState(
       {
       currentCity: city,
-      type: postcode,
-      postcode: type,
+      type: type,
+      postcode: postcode,
     })
   }
 

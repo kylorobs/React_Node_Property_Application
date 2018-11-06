@@ -28,7 +28,7 @@ function getAdunaListing(city, category, type, postcode){
     constructedURL = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=${category}&app_id=${apiID}&app_key=${apiKEY}&results_per_page=1000&where=${city}&property_type=${type}`
   }
   else {
-    constructedURL = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=${category}&app_id=${apiID}&app_key=${apiKEY}&results_per_page=1000&where=${postcode}&property_type=${type}`
+    constructedURL = `http://api.adzuna.com/v1/api/property/gb/search/1/?category=${category}&app_id=${apiID}&app_key=${apiKEY}&results_per_page=1000&property_type=${type}&where=${postcode}`
   }
   console.log("constructed URL: " + constructedURL)
 

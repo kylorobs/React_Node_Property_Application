@@ -32,7 +32,7 @@ function getPropertyTypes(city, postcode){
             }
             console.log(type);
             data.push(type);
-            resolve(type);
+            resolve(data);
           });
         }
     });
