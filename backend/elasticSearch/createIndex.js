@@ -12,14 +12,14 @@ function createIndex(indexName){
     }
   });
 }
-// 
-// createIndex('london');
-createIndex('bournemouth');
-// createIndex('bristol');
+//
+createIndex('london');
+// createIndex('bournemouth');
+createIndex('bristol');
 // createIndex('colchester');
-// createIndex('ipswich');
-// createIndex('leeds');
-// createIndex('middlesbrough');
+createIndex('ipswich');
+createIndex('leeds');
+createIndex('middlesbrough');
 // createIndex('newcastle');
 // createIndex('portsmouth');
 // createIndex('southampton');

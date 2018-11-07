@@ -1,12 +1,12 @@
 var client = require('./elasticConnection.js');
-var inputFile = require('./json_docs/bournemouth.json');
+var inputFile = require('./json_docs/Middlesbrough.json');
 var bulk = [];
 var data = inputFile.results;
 
 var createBulk = function(jsonDoc, callback){
   for (var i in jsonDoc){
     bulk.push(
-      {index: {_index:'bournemouth', _type: 'property_sales'} },
+      {index: {_index:'middlesbrough', _type: 'property_sales'} },
       {
         'price': jsonDoc[i].price_paid,
         'date' : jsonDoc[i].deed_date,
@@ -29,7 +29,7 @@ var createBulk = function(jsonDoc, callback){
 
 var indexAll = function(finishedBulk, callback){
   client.bulk({
-    index: 'bournemouth',
+    index: 'middlesbrough',
     type: 'property_sales',
     body: finishedBulk
   }, function(err, resp, status){

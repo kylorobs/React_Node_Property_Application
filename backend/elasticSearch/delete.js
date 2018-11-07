@@ -6,15 +6,15 @@ function deleteIndex(index){
   });
 }
 
-// deleteIndex('london');
-deleteIndex('bournemouth');
-// // deleteIndex('bristol');
-// // deleteIndex('colchester');
-// // deleteIndex('ipswich');
-// // deleteIndex('leeds');
-// deleteIndex('middlesbrough');
-// deleteIndex('newcastle');
-// deleteIndex('portsmouth');
-// deleteIndex('scarborough');
-// deleteIndex('southampton');
-// deleteIndex('sunderland');
+deleteIndex('london');
+// deleteIndex('bournemouth');
+deleteIndex('bristol');
+deleteIndex('colchester');
+deleteIndex('ipswich');
+deleteIndex('leeds');
+deleteIndex('middlesbrough');
+deleteIndex('newcastle');
+deleteIndex('portsmouth');
+deleteIndex('scarborough');
+deleteIndex('southampton');
+deleteIndex('sunderland');

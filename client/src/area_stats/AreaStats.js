@@ -55,7 +55,7 @@ class AreaStats extends React.Component{
     }
 
     else {
-      console.log("finding array: " + array)
+      // console.log("finding array: " + array)
     return array.reduce(function(a, b){
         return a + b;
       })/ array.length;
@@ -72,7 +72,7 @@ class AreaStats extends React.Component{
       return "No data!"
     }
 
-    console.log("av function received data: " + data);
+    // console.log("av function received data: " + data);
     let bedsArray = data.filter(item => item.beds === beds)
 
     if (data === this.state.sales){

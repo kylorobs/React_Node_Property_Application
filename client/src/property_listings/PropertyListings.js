@@ -3,10 +3,6 @@ import React from 'react';
 import SearchResult from './SearchResult.js';
 import CategoryButton from './CategoryButton.js';
 
-// require('dotenv').config();
-// const React = require('react');
-// const SearchResult = require('./SearchResult.js');
-// const CategoryButton = require('./CategoryButton.js')
 
 
 class PropertyListings extends React.Component{
@@ -20,28 +16,36 @@ class PropertyListings extends React.Component{
     this.changeCategory = this.changeCategory.bind(this);
   }
 
-  changeCategory(sale){
-    var category = (sale) ? "for-sale" : "to-rent";
-    this.setState({category: category})
-    this.fetchProperties();
+  changeCategory(){
+    let current = this.state.category;
+    let newCategory;
+
+    switch(current){
+      case 'for-sale':
+        newCategory = 'to-rent'
+      break;
+      case 'to-rent':
+        newCategory = 'for-sale';
+      break;
+      default:
+        newCategory = 'for-sale';
+    }
+
+    this.setState({category: newCategory})
   }
 
 
 componentDidMount(){
-  this.setState({ isLoading: true })
-  let currentCategory = this.state.category;
+
   let city = this.props.city;
   let type = this.props.type;
   let postcode = this.props.postcode;
-  let endpoint = `/api/city-listings/${city}/${currentCategory}/${type}/${postcode}`;
-
-  console.log("current category= " + currentCategory)
-    console.log("property listings url= " + endpoint)
+  let endpoint = `/api/city-listings/${city}/${this.state.category}/${type}/${postcode}`;
 
   fetch(endpoint)
   .then(res => res.json()).then((data)=> {
     let properties = data.results.map((property, i) => {
-      switch(property.category.tag){
+      switch(this.state.category){
         case 'for-sale':
           return <SearchResult key={i} title={property.title} type={property.property_type} price={property.sale_price} image={property.image_url} category={this.state.category} />
         break;
@@ -58,8 +62,11 @@ componentDidMount(){
 
 
   render(){
+    let saleButton = 'for sale';
+    let rentButton = 'to rent'
     return (<div>
-            <CategoryButton onChange={this.changeCategory} />
+            <CategoryButton onChange={this.changeCategory} buttonText={saleButton} />
+            <CategoryButton onChange={this.changeCategory} buttonText={rentButton} />
             {this.state.listingsData}
            </div>)
   }

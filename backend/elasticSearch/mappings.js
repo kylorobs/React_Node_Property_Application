@@ -11,7 +11,7 @@ function mapData(index){
         },
         'date' : {
           'type' : 'date',
-          'format' : "dd/MM/yyyy || MM/yyyy"   
+          'format' : "dd/MM/yyyy || MM/yyyy"
         },
         'postcode' : {
           'type' : 'keyword'
@@ -55,4 +55,8 @@ function mapData(index){
   });
 }
 
-mapData('bournemouth')
+mapData('london')
+mapData('bristol')
+mapData('ipswich')
+mapData('leeds')
+mapData('middlesbrough')

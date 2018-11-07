@@ -4,7 +4,7 @@ import Banner from './banner/Banner.js'
 import DealFetcher from './saved_deals/DealFetcher.js'
 import PropertyListings from './property_listings/PropertyListings.js'
 import Calculations from './calculations/Calculations.js'
-// import Chart from './chart/Chart.js'
+import NewChart from './chart/NewChart.js'
 import AreaStats from './area_stats/AreaStats.js'
 import CityPicker from './city_picker/CityPicker.js'
 
@@ -13,9 +13,9 @@ class App extends Component {
     super(props)
     this.state = {
       title: "Investment Deal Checker",
-      currentCity: 'bournemouth',
+      currentCity: 'bristol',
       type: 'flat',
-      postcode: 'BH13QJ',
+      postcode: 'BS1%201EL',
       testValue : 'test'
     }
 
@@ -61,7 +61,7 @@ class App extends Component {
               <AreaStats city={this.state.currentCity} type={this.state.type} postcode={this.state.postcode}/>
             </div>
             <div className="charts">
-
+            <NewChart city={this.state.currentCity} type={this.state.type} postcode={this.state.postcode} />
             </div>
           </div>
       </div>

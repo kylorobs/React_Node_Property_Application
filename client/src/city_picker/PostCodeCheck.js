@@ -8,71 +8,107 @@ class PostCodeCheck extends React.Component{
     }
     this.selectType = this.selectType.bind(this)
     this.findType = this.findType.bind(this)
+      this.checkPostCode = this.checkPostCode.bind(this)
   }
 
-  selectType(){
-    console.log("this is coming");
+  selectType(e){
+    let target = e.target;
+    let targetValue = e.target.dataset.property;
+    console.log("selected target:" : targetValue)
+
+    let selected = document.querySelectorAll('li');
+    selected.forEach(i => i.classList.remove('typeSelected'))
+    target.classList.add('typeSelected');
+    this.props.onReadyChange(true);
+    // this.props.typeChange(target)
   }
 
-  findType(array, type){
-    let currentTypes = this.state.type;
-    let checkType =array.find(item => item.type === type);
+  findType(array, proposedType){
+      let newType = proposedType;
+      console.log("newType inserted is: " + newType)
+    let currentTypes = this.state.types;
+    let checkType =array.find(item => item.type === newType);
     if (checkType) {
-      switch(type) {
+      switch(newType) {
         case "D":
-          type = 'detached'
+          newType = 'detached'
         break;
         case "S":
-          type = 'semi-detached'
+          newType = 'semi-detached'
         break;
         case "F":
-          type = 'flat'
+          newType = 'flat'
         break;
         case "O":
-          type = 'bungalow'
+          newType = 'bungalow'
         break;
         case "T":
-          type = 'terraced'
+          newType = 'terraced'
         break;
         default:
-        type="undefined"
+        newType="undefined"
       }
-      currentTypes = currentTypes.push(type)
+      currentTypes.push(newType)
+      console.log("about to push: ");
+      console.log(currentTypes)
     }
     this.setState({types: currentTypes})
   }
 
-
-  componentDidMount(){
-
-    let url = `/api/property-types/bournemouth/${this.props.selectedPostCode}`;
+  checkPostCode(){
+    let url = `/api/property-types/${this.props.selectedCity}/${this.props.selectedPostCode}`;
     console.log("Post Code Checker url: " + url)
 
     fetch(url)
     .then(res=> res.json()).then(results => {
       // let checkType =results.data.map(item => item.type)
+      let array = results.data;
         console.log("found type is: ")
-      console.log(results.data)
-      // this.findType(array, 'D')
-      // this.findType(array, 'S')
-      // this.findType(array, 'F')
-      // this.findType(array, 'O')
-      // this.findType(array, 'T')
+      console.log("fetched data" + results.data)
+      this.findType(array, 'D')
+      this.findType(array, 'S')
+      this.findType(array, 'F')
+      this.findType(array, 'O')
+      this.findType(array, 'T')
     })
-
   }
+
 
 
   render(){
     let currentTypes = this.state.types;
-    let lis = currentTypes.map(item => {
-      return <li onClick={this.selectType}> item </li>
+    console.log("The types currently in stats:")
+    console.log(currentTypes)
+    let lis = <li> Looking for properties </li>;
+    let chooseType;
+
+    if (currentTypes.length > 0){
+      lis = currentTypes.map((item, index) => {
+      return <li data-property={item} className="typeOptions" onClick={this.selectType}> {item} </li>
     })
 
+    chooseType = (
+      <div>
+        <p className="teal"> Select from the following </p>
+         <ul>
+          {lis}
+         </ul>
+      </div>
+    )
+  }
+
+  else {
+    chooseType = (
+    <div>  </div>
+  )
+  }
+
     return (
-      <ul>
-        {lis}
-      </ul>
+
+      <div>
+        <button onClick ={this.checkPostCode}> Check Post code </button>
+        {chooseType}
+      </div>
     )
   }
 

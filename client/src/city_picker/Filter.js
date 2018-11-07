@@ -7,6 +7,8 @@ class Filter extends React.Component{
     super(props)
     this.onSelectorChange = this.onSelectorChange.bind(this)
     this.onPostCodeChange = this.onPostCodeChange.bind(this)
+    this.onTypeChange = this.onTypeChange.bind(this)
+    this.onReadyToSubmitChange = this.onReadyToSubmitChange.bind(this)
   }
 
   onSelectorChange(e){
@@ -20,6 +22,14 @@ class Filter extends React.Component{
 
   onPostCodeChange(newPostCode){
     this.props.postCodeChange(newPostCode)
+  }
+
+  onTypeChange(type){
+    this.props.typeChange(type)
+  }
+
+  onReadyToSubmitChange(bool){
+    this.props.readyToSubmit(bool)
   }
 
 
@@ -39,7 +49,7 @@ class Filter extends React.Component{
         <span className="heading"> Enter the postcode </span>
         <Input onChange={this.onPostCodeChange}  label="Post Code" placeholder="eg SW15 6BB"  type="text"/>
         <a className="submit"> Check postcode </a>
-        <PostCodeCheck selectedCity ={this.props.selectedCity} selectedPostCode={this.props.selectedPostCode} />
+        <PostCodeCheck onReadyChange={this.onReadyToSubmitChange} changeType= {this.onTypeChange} selectedCity ={this.props.selectedCity} selectedPostCode={this.props.selectedPostCode} />
       </div>
     )
       return result
