@@ -12,6 +12,12 @@ class Filter extends React.Component{
   }
 
   onSelectorChange(e){
+    let typeCurrentlySelected = document.querySelectorAll('li');
+    typeCurrentlySelected.forEach(i => {
+      i.classList.remove('typeSelected')
+      i.style.display = 'none';
+    })
+
     var target = e.target;
     console.log(target)
     var selected = target.options[target.selectedIndex].value;
@@ -38,7 +44,7 @@ class Filter extends React.Component{
 
       let result = (!this.props.filter) ? <div className="filterBoxOff"></div> :
       (<div className="filterBoxOn">
-        <span className="heading"> Your chosen city </span>
+        <span className="heading"> Your chosen city:  </span>
         <select onChange={this.onSelectorChange}>
           <option value="bournmouth">Bournemouth</option>
           <option  value="london">London</option>
@@ -48,7 +54,6 @@ class Filter extends React.Component{
         </select>
         <span className="heading"> Enter the postcode </span>
         <Input onChange={this.onPostCodeChange}  label="Post Code" placeholder="eg SW15 6BB"  type="text"/>
-        <a className="submit"> Check postcode </a>
         <PostCodeCheck onReadyChange={this.onReadyToSubmitChange} changeType= {this.onTypeChange} selectedCity ={this.props.selectedCity} selectedPostCode={this.props.selectedPostCode} />
       </div>
     )

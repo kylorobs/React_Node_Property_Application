@@ -4,6 +4,10 @@
   margin: 2em;
 }
 
+ul {
+  padding: 0
+}
+
 ul li {
   list-style: none;
 }
@@ -30,6 +34,11 @@ h4 {
   margin: 0.5em 0;
 }
 
+select, input {
+  width: 10em;
+height: 2em;
+font-size: 1.1em;
+}
 .teal {
   color: teal;
 }
@@ -51,6 +60,12 @@ h4 {
   margin: 1em;
   background-color: whiteSmoke;
   cursor: pointer;
+}
+
+.banner h3 {
+  border-bottom: 5px solid pink;
+    padding-bottom: 1em;
+    margin-bottom: 0;
 }
 
 
@@ -81,7 +96,7 @@ h4 {
   background-color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .relative {
@@ -289,10 +304,21 @@ background-color: red;
   top: 30%
 }
 
+.heading{
+  display: block;
+  font-size: 1.4em;
+  color: teal;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
 .filterBoxOn {
   position: absolute;
-  left: 5%;
-  top: 30%
+  left: 1%;
+    top: 20%;
+    border: 10px solid pink;
+    padding: 1em;
 }
 
 .selected-city {
@@ -307,10 +333,12 @@ background-color: red;
 .typeOptions {
     box-shadow: 0 3px 3px -3px rgba(0,0,0,.3);
     padding: 0.3em;
-    font-size: 1.1em;
+    font-size: 1.3em;
     width: 8em;
     text-align: center;
     transition: 0.1s;
+    background-color: teal;
+    color:white
 }
 
 .typeOptions:hover {
@@ -319,7 +347,7 @@ background-color: red;
 }
 
 .typeSelected {
-  background-color: teal;
+  background-color: pink;
   color: white;
 }
 

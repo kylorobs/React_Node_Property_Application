@@ -15,7 +15,6 @@ class Input extends React.Component{
   render(){
     return (
     <div>
-      <h3> {this.props.label} </h3>
       <input label={this.props.label} placeholder={this.props.placeholder} type={this.props.type} onInput={this.handleChange} />
     </div>
   )}

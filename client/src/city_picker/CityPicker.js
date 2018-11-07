@@ -52,6 +52,14 @@ class CityPicker extends React.Component{
 
   cityPicker(e){
 console.log(e.target.id)
+
+let typeCurrentlySelected = document.querySelectorAll('li');
+typeCurrentlySelected.forEach(i => {
+  i.classList.remove('typeSelected')
+  i.style.display = 'none';
+})
+
+
 let selectedCity = e.target.id
   this.setState({selectedCity: selectedCity,
                 filterBox: true});

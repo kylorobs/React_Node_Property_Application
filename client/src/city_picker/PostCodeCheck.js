@@ -13,14 +13,15 @@ class PostCodeCheck extends React.Component{
 
   selectType(e){
     let target = e.target;
-    let targetValue = e.target.dataset.property;
-    console.log("selected target:" : targetValue)
+    let targetValue = target.dataset.property;
+    console.log("selected target:")
+    console.log(target.dataset.property)
 
     let selected = document.querySelectorAll('li');
     selected.forEach(i => i.classList.remove('typeSelected'))
     target.classList.add('typeSelected');
     this.props.onReadyChange(true);
-    // this.props.typeChange(target)
+    this.props.changeType(targetValue)
   }
 
   findType(array, proposedType){
@@ -84,6 +85,8 @@ class PostCodeCheck extends React.Component{
 
     if (currentTypes.length > 0){
       lis = currentTypes.map((item, index) => {
+        console.log("item to go into li");
+        console.log(item)
       return <li data-property={item} className="typeOptions" onClick={this.selectType}> {item} </li>
     })
 
