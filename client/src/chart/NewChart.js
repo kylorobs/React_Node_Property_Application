@@ -9,13 +9,14 @@ class NewChart extends React.Component{
         dataX: null,
         dataY: null
       }
+      this.createChart = this.createChart.bind(this);
 
   }
 
-  componentDidMount(){
-
+  createChart(){
     let url = `/api/city-data/${this.props.city}/${this.props.type}/${this.props.postcode}`;
     console.log("Chart fetch URL: " + url)
+    console.log("Chart fetch URL: " + this.props.type)
 
     fetch(url)
     .then(res => res.json()).then(results => {
@@ -51,7 +52,22 @@ class NewChart extends React.Component{
         .catch(err => {
           console.log("ERROR: " +  err);
         })
-        }
+  }
+
+
+      componentDidUpdate(prevProps, prevState){
+        if (prevProps.city !== this.props.city){
+        this.createChart();
+      }
+
+      else {
+        return;
+      }
+      }
+
+      componentDidMount(prevProps, prevState){
+            this.createChart();
+      }
 
 
   render(){

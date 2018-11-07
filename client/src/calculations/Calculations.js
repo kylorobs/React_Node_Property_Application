@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '../buttons_inputs/Input.js'
+import PriceInput from '../buttons_inputs/PriceInput.js'
 import AvSalePrice from './AvSalePrice.js'
 
 class Calculations extends React.Component{
@@ -20,8 +20,8 @@ class Calculations extends React.Component{
   render(){
     return(
       <div className="calcs">
-        <Input onChange={this.changePrice}  label="Deal Price" placeholder="eg 57000"  type="number"/>
-        <Input onChange={this.changePostCode}  label="Post Code" placeholder="eg SW15 6BB"  type="text"/>
+        <h3 className="pink"> Enter the purchase price of your property </h3>
+        <PriceInput onChange={this.changePrice} id="dealInput" placeholder="eg 57000"  type="number"/>
         <AvSalePrice city={this.props.city} type={this.props.type} postcode={this.props.postcode} purchasePrice = {this.state.purchase_price} />
       </div>
 

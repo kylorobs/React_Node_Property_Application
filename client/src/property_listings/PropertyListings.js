@@ -55,7 +55,7 @@ console.log(endpoint)
 
 
 componentDidUpdate(prevProps, prevState){
-  if (prevState.category !== this.state.category){
+  if (prevState.category !== this.state.category || prevProps !== this.props){
   this.fetchProperties();
 }
 
@@ -65,7 +65,12 @@ else {
 }
 
 componentDidMount(prevProps, prevState){
-  this.fetchProperties();
+  if (prevProps !== this.props){
+    this.fetchProperties();
+  }
+  else {
+    return;
+  }
 }
 
 

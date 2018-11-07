@@ -47,10 +47,22 @@ font-size: 1.1em;
   color: #1c1a52;
 }
 
+.pink {
+  color: pink;
+}
+
 .flex {
   display: flex;
+  align-items: center;
+    height: 100%;
+}
+
+.flex-start{
+  justify-content:flex-start;
+}
+
+.center {
   justify-content: center;
-  aling-items: center;
 }
 
 .button-container {
@@ -68,6 +80,10 @@ font-size: 1.1em;
   cursor: pointer;
 }
 
+.banner {
+  z-index:2000;
+}
+
 .banner h3 {
   border-bottom: 5px solid pink;
     padding-bottom: 1em;
@@ -81,7 +97,7 @@ font-size: 1.1em;
   height: 100vh;
   width: 100%;
   grid-template-columns: 2fr 2fr 2fr;
-  grid-template-rows: 4em 4em 1fr 1fr;
+  grid-template-rows: 4em 6em 1fr 1fr;
   grid-template-areas:
     "saved-deals saved-deals saved-deals"
     "search-inputs search-inputs search-inputs"
@@ -208,6 +224,21 @@ font-size: 1.1em;
   background-color: blue;
 }
 
+.priceAverage{
+  text-align: center;
+font-size: 1.4em;
+filter: brightness(2);
+color: teal;
+}
+
+.marginHigher{
+  text-align: center;
+    color: pink;
+    font-size: 5em;
+    margin: 0.2em;
+    padding: 0;
+}
+
 
 /*MAP */
 .image-container {
@@ -247,8 +278,8 @@ font-size: 1.1em;
             transform: translateY(0);
   }
   100% {
-    -webkit-transform: translateY(-2000px);
-            transform: translateY(-2000px);
+    -webkit-transform: translateY(-3000px);
+            transform: translateY(-3000px);
   }
 }
 @keyframes slide-out-top {
@@ -257,8 +288,8 @@ font-size: 1.1em;
             transform: translateY(0);
   }
   100% {
-    -webkit-transform: translateY(-2000px);
-            transform: translateY(-2000px);
+    -webkit-transform: translateY(-3000px);
+            transform: translateY(-3000px);
   }
 }
 
@@ -338,8 +369,28 @@ background-color: red;
     align-items: center;
     justify-content: flex-start;
     margin-left: 3em;
-    border: 10px solid pink;
-    padding: 1em;
+    padding: 0.2em;
+}
+
+.filterBoxOnHome select, .filterBoxOnHome input {
+  width: 10em;
+height: 2em;
+font-size: 1.1em;
+}
+
+.filterBoxOnUI .heading{
+  display: block;
+  font-size: 1.1em;
+  color: teal;
+  font-weight: bold;
+  margin: 0 1em;
+}
+
+.filterBoxOnUI input, .filterBoxOnUI select{
+  width: 10em;
+}
+.filterBoxOnUI input {
+    height: 1.3em;
 }
 
 .selected-city {
@@ -359,7 +410,8 @@ background-color: red;
     text-align: center;
     transition: 0.1s;
     background-color: teal;
-    color:white
+    color:white;
+        margin: 0.5em 0;
 }
 
 .typeOptions:hover {

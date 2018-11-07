@@ -17,6 +17,7 @@ class PostCodeCheck extends React.Component{
     console.log("selected target:")
     console.log(target.dataset.property)
 
+
     let selected = document.querySelectorAll('li');
     selected.forEach(i => i.classList.remove('typeSelected'))
     target.classList.add('typeSelected');
@@ -52,8 +53,12 @@ class PostCodeCheck extends React.Component{
       currentTypes.push(newType)
       console.log("about to push: ");
       console.log(currentTypes)
+      this.setState({types: currentTypes})
     }
-    this.setState({types: currentTypes})
+
+    else {
+      return;
+    }
   }
 
   checkPostCode(){
@@ -78,8 +83,6 @@ class PostCodeCheck extends React.Component{
 
   render(){
     let currentTypes = this.state.types;
-    console.log("The types currently in stats:")
-    console.log(currentTypes)
     let lis = <li> Looking for properties </li>;
     let chooseType;
 

@@ -29,6 +29,7 @@ class AreaStats extends React.Component{
   }
 
   fetchRents(){
+    this.setState({rents: null})
     let city = this.props.city;
       let type = this.props.type;
       let postcode = this.props.postcode;
@@ -97,17 +98,29 @@ class AreaStats extends React.Component{
   }
 
 
-  componentWillMount(){
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps.city !== this.props.city){
+      this.fetchSales()
+      this.fetchRents();
+  }
+
+  else {
+    return;
+  }
+  }
+
+  componentDidMount(prevProps, prevState){
     this.fetchSales()
     this.fetchRents()
   }
-
 
 
   render(){
     let sales = this.state.sales;
     let rents = this.state.rents;
     let message = "calculating...";
+    let postcode = decodeURIComponent(this.state.postcode)
 
     let onebedsale = message;
     let onebedrent = message;
@@ -137,10 +150,10 @@ class AreaStats extends React.Component{
     return (
         <div>
           <h2 className="teal"> {this.props.city} </h2>
-          <h4> Property type: {this.props.type} </h4>
-          <h4> Postcode: {this.props.postcode} </h4>
+          <h4> <span className="teal"> Property type: {this.props.type} </span></h4>
+          <h4><span className="teal"> Postcode:</span> {postcode} </h4>
           <div className="info-table">
-          <span className="teal"> Calcuated averages </span>
+          <span className="pink"> Calcuated averages </span>
           <table>
           <tr>
             <th>Beds</th>

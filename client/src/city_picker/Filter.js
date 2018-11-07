@@ -12,6 +12,8 @@ class Filter extends React.Component{
   }
 
   onSelectorChange(e){
+    let input = document.getElementById('postcode-input');
+    input.value = ' ';
     let typeCurrentlySelected = document.querySelectorAll('li');
     typeCurrentlySelected.forEach(i => {
       i.classList.remove('typeSelected')
@@ -53,14 +55,16 @@ class Filter extends React.Component{
       (<div className={styleName}>
         <span className="heading"> Your chosen city:  </span>
         <select onChange={this.onSelectorChange}>
-          <option value="bournmouth">Bournemouth</option>
-          <option  value="london">London</option>
-          <option value="ipswich">Ipswich</option>
+          <option value="bournemouth">Bournemouth</option>
           <option value="bristol">Bristol</option>
+            <option value="ipswich">Ipswich</option>
+          <option value="leeds">Leeds</option>
+          <option  value="london">London</option>
+          <option value="middlesbrough">Middlesbrough</option>
           <option value={this.props.selectedCity} selected>{this.props.selectedCity}</option>
         </select>
         <span className="heading"> Enter the postcode </span>
-        <Input onChange={this.onPostCodeChange}  label="Post Code" placeholder="eg SW15 6BB"  type="text"/>
+        <Input onChange={this.onPostCodeChange}  id="postcode-input" placeholder="eg SW15 6BB"  type="text"/>
         <PostCodeCheck onReadyChange={this.onReadyToSubmitChange} changeType= {this.onTypeChange} selectedCity ={this.props.selectedCity} selectedPostCode={this.props.selectedPostCode} />
       </div>
     )

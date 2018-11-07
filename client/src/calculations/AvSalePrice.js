@@ -11,6 +11,7 @@ class AvSalePrice extends React.Component{
     }
     this.getAverage = this.getAverage.bind(this);
     this.calculateBelowAv = this.calculateBelowAv.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
   getAverage(array){
@@ -28,20 +29,13 @@ class AvSalePrice extends React.Component{
     if (!purchasePrice){
       return ""
     }
-    else{
+    else {
       let answer = 100 - (Math.floor((purchasePrice/averagePrice) * 100));
-      return(
-        <div>
-        <p>Your equity gain is: </p>
-        <p> {answer}% </p>
-        </div>
-      )
+      return answer;
     }
   }
 
-
-
-  componentDidMount(){
+  fetchData(){
     let url = `/api/city-data/${this.props.city}/${this.props.type}/${this.props.postcode}`;
     console.log("AV sale URL: " + url)
 
@@ -53,32 +47,63 @@ class AvSalePrice extends React.Component{
       let averagePrice = this.getAverage(prices);
       let purchasePrice = this.props.purchasePrice;
       let belowMV = purchasePrice;
-      console.log(prices);
 
       this.setState({priceArray: prices, averagePrice: averagePrice, belowMV: belowMV})
     })
+
   }
 
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps.city !== this.props.city || prevProps.postcode !== this.props.postcode || prevProps.type !== this.props.type || prevProps.purchasePrice !== this.props.purchasePrice){
+    this.fetchData();
+  }
+
+  else {
+    return;
+  }
+  }
+
+  componentDidMount(prevProps, prevState){
+
+    if (this.props.city){
+      this.fetchData();
+    }
+      else {
+        return;
+      }
+  }
 
 
 
 
   render(){
     let s = this.state.averagePrice;
-    let p = this.props.purchasePrice;
-    let equityGain = this.calculateBelowAv(p, s)
+    let p = decodeURIComponent(this.props.purchasePrice);
+    let equityGain = Math.abs(this.calculateBelowAv(p, s));
+    let finalAverage = Math.floor(this.state.averagePrice);
 
 
+    let result;
+    if (p > s){
+      result = (
+        <div>
+        <p>Your margin is: </p>
+        <p className="marginHigher"> {equityGain}% </p>
+        </div>)}
+    else if (p < s){
+      result = (
+        <div className="marginLower">
+          <p>Your margin is less than the average for this area </p>
+        </div> )
+    }
 
-
-    return(
+    return (
       <div>
-        <p> The average price for propertis of this type in post code:</p>
-        <p><strong> £{this.state.averagePrice}</strong> </p>
-        <p><strong>{equityGain}</strong> </p>
+        <p> The <span className="priceAverage">average price </span>for properties of this type in post code:</p>
+        <p className="priceAverage"> £{finalAverage}</p>
+        <p><strong>{result}</strong> </p>
       </div>
-
-
     )
   }
 }

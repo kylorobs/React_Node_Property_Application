@@ -7,15 +7,16 @@ import Calculations from './calculations/Calculations.js'
 import NewChart from './chart/NewChart.js'
 import AreaStats from './area_stats/AreaStats.js'
 import CityPicker from './city_picker/CityPicker.js'
+import CityPickerDashboard from './city_picker/CityPickerDashboard.js'
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
       title: "Investment Deal Checker",
-      currentCity: 'bristol',
+      currentCity: null,
       type: 'flat',
-      postcode: 'BS1%201EL',
+      postcode: null,
       testValue : 'test'
     }
 
@@ -48,7 +49,7 @@ class App extends Component {
               <p> All your <strong>saved searches</strong> will be here.</p>
             </div>
             <div className="search-inputs">
-              <p> All the <strong>search inputs</strong> will be here.</p>
+              <CityPickerDashboard onChange={this.handleChange} />
             </div>
             <div className="property-listings">
               <h3>Current property listings </h3>

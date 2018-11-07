@@ -52,7 +52,8 @@ class CityPicker extends React.Component{
 
   cityPicker(e){
 console.log(e.target.id)
-
+let input = document.getElementById('postcode-input');
+input.value = ' ';
 let typeCurrentlySelected = document.querySelectorAll('li');
 typeCurrentlySelected.forEach(i => {
   i.classList.remove('typeSelected')
@@ -71,7 +72,6 @@ let selectedCity = e.target.id
   render(){
     return (<div className="relative">
             <Map changeTest={this.onTestChange} />
-            <button onClick={this.submitChange}> Let's change the city info </button>
             <div onClick={this.cityPicker} className="circle heartbeat" id="bournemouth"></div>
             <div onClick={this.cityPicker} className="circle heartbeat" id="london"></div>
             <div onClick={this.cityPicker} className="circle heartbeat" id="bristol"></div>
