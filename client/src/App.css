@@ -47,6 +47,12 @@ font-size: 1.1em;
   color: #1c1a52;
 }
 
+.flex {
+  display: flex;
+  justify-content: center;
+  aling-items: center;
+}
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -178,6 +184,12 @@ font-size: 1.1em;
  margin: 0.5em 0 0.5em 0;
 }
 
+.search-result a{
+  text-decoration: none;
+  color: black;
+}
+
+
 .search-result-info .title {
   font-size: 1.2em;
   text-align: center;
@@ -235,8 +247,8 @@ font-size: 1.1em;
             transform: translateY(0);
   }
   100% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
+    -webkit-transform: translateY(-2000px);
+            transform: translateY(-2000px);
   }
 }
 @keyframes slide-out-top {
@@ -245,8 +257,8 @@ font-size: 1.1em;
             transform: translateY(0);
   }
   100% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
+    -webkit-transform: translateY(-2000px);
+            transform: translateY(-2000px);
   }
 }
 
@@ -313,10 +325,19 @@ background-color: red;
   margin-bottom: 0.5em;
 }
 
-.filterBoxOn {
+.filterBoxOnHome {
   position: absolute;
   left: 1%;
     top: 20%;
+    border: 10px solid pink;
+    padding: 1em;
+}
+
+.filterBoxOnUI {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 3em;
     border: 10px solid pink;
     padding: 1em;
 }

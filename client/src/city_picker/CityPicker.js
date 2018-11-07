@@ -78,7 +78,7 @@ let selectedCity = e.target.id
             <div onClick={this.cityPicker} className="circle heartbeat" id="ipswich"></div>
             <div onClick={this.cityPicker} className="circle heartbeat" id="leeds"></div>
             <div onClick={this.cityPicker} className="circle heartbeat" id="middlesbrough"></div>
-            <Filter filter={this.state.filterBox} readyToSubmit={this.onReadyToSubmit} selectedCity={this.state.selectedCity} selectedPostCode={this.state.selectedPostCode} typeChange={this.onTypeChange} cityChange={this.onCityChange} postCodeChange={this.onPostCodeChange} />
+            <Filter name="Home" filter={this.state.filterBox} readyToSubmit={this.onReadyToSubmit} selectedCity={this.state.selectedCity} selectedPostCode={this.state.selectedPostCode} typeChange={this.onTypeChange} cityChange={this.onCityChange} postCodeChange={this.onPostCodeChange} />
             <SelectedCity selectedCity={this.state.selectedCity} />
             <Submit submit={this.submitChange} ready={this.state.readyToSubmit} />
             </div>

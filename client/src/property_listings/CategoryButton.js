@@ -7,7 +7,16 @@ class CategoryButton extends React.Component {
   }
 
   onClick(){
-    this.props.onChange()
+    let buttonText = this.props.buttonText;
+
+    if (buttonText === 'sale'){
+      this.props.onChange('for-sale')
+    }
+
+    else if (buttonText === 'rent'){
+      this.props.onChange('to-rent')
+    }
+
   }
 
   render(){

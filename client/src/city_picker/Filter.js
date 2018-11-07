@@ -42,8 +42,15 @@ class Filter extends React.Component{
 
   render(){
 
+    let styleName;
+    if (this.props.name === "Home"){
+      styleName = 'filterBoxOnHome'
+    }
+    else {
+        styleName = 'filterBoxOnUI'
+    }
       let result = (!this.props.filter) ? <div className="filterBoxOff"></div> :
-      (<div className="filterBoxOn">
+      (<div className={styleName}>
         <span className="heading"> Your chosen city:  </span>
         <select onChange={this.onSelectorChange}>
           <option value="bournmouth">Bournemouth</option>

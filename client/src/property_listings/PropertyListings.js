@@ -14,59 +14,76 @@ class PropertyListings extends React.Component{
       isLoading: false,
     }
     this.changeCategory = this.changeCategory.bind(this);
+    this.fetchProperties = this.fetchProperties.bind(this);
   }
 
-  changeCategory(){
-    let current = this.state.category;
-    let newCategory;
+  changeCategory(text){
+    let newCategory = text;
+    console.log("The new category is: ");
+    console.log(newCategory);
+    this.setState({category: newCategory,  isLoading: true})
 
-    switch(current){
-      case 'for-sale':
-        newCategory = 'to-rent'
-      break;
-      case 'to-rent':
-        newCategory = 'for-sale';
-      break;
-      default:
-        newCategory = 'for-sale';
-    }
-
-    this.setState({category: newCategory})
   }
 
+  fetchProperties(){
+    let city = this.props.city;
+    let type = this.props.type;
+    let postcode = this.props.postcode;
+    let currentCategory = this.state.category;
+    let endpoint = `/api/city-listings/${city}/${this.state.category}/${type}/${postcode}`;
 
-componentDidMount(){
+console.log("fetching the following")
+console.log(endpoint)
+    fetch(endpoint)
+    .then(res => res.json()).then((data)=> {
+      let properties = data.results.map((property, i) => {
+          if(currentCategory === 'for-sale'){
+              return <SearchResult key={i} title={property.title} type={property.property_type} price={property.sale_price} image={property.image_url} src={property.redirect_url} category="for-sale" />
+          }
 
-  let city = this.props.city;
-  let type = this.props.type;
-  let postcode = this.props.postcode;
-  let endpoint = `/api/city-listings/${city}/${this.state.category}/${type}/${postcode}`;
+          else if(currentCategory === 'to-rent'){
+              return <SearchResult key={i} title={property.title} type={property.property_type} price={property.price_per_month} image={property.image_url} src={property.redirect_url} beds={property.beds} category="to-rent" />
+          }
 
-  fetch(endpoint)
-  .then(res => res.json()).then((data)=> {
-    let properties = data.results.map((property, i) => {
-      switch(this.state.category){
-        case 'for-sale':
-          return <SearchResult key={i} title={property.title} type={property.property_type} price={property.sale_price} image={property.image_url} category={this.state.category} />
-        break;
-        case 'to-rent':
-          return <SearchResult key={i} title={property.title} type={property.property_type} price={property.price_per_month} image={property.image_url} beds={property.beds} category={this.state.category} />
-        break;
-        default:
-          return <p>No properties found </p>
-      }
+          else {
+            return <p> No properties found! </p>
+          }
+      })
+      this.setState({listingsData: properties, isLoading: false})
     })
-    this.setState({listingsData: properties, isLoading: false})
-  })
+  }
+
+
+componentDidUpdate(prevProps, prevState){
+  if (prevState.category !== this.state.category){
+  this.fetchProperties();
+}
+
+else {
+  return;
+}
+}
+
+componentDidMount(prevProps, prevState){
+  this.fetchProperties();
 }
 
 
+
+
+
   render(){
-    let saleButton = 'for sale';
-    let rentButton = 'to rent'
+    const listingsData = this.state.listingsData;
+
+      if (!listingsData) {
+      return <p>Loading ...</p>;
+    }
+
     return (<div>
-            <CategoryButton onChange={this.changeCategory} buttonText={saleButton} />
-            <CategoryButton onChange={this.changeCategory} buttonText={rentButton} />
+              <div className="flex">
+                <CategoryButton onChange={this.changeCategory} buttonText='sale' />
+                <CategoryButton onChange={this.changeCategory} buttonText='rent' />
+              </div>
             {this.state.listingsData}
            </div>)
   }
