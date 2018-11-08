@@ -255,10 +255,17 @@ color: teal;
 
 .marginHigher{
   text-align: center;
-    color: pink;
     font-size: 5em;
     margin: 0.2em;
     padding: 0;
+}
+
+.below {
+  color: #15df17;
+}
+
+.above {
+  color: #df1515;
 }
 
 

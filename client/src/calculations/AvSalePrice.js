@@ -88,13 +88,14 @@ class AvSalePrice extends React.Component{
     if (p > s){
       result = (
         <div>
-        <p>Your margin is: </p>
-        <p className="marginHigher"> {equityGain}% </p>
+        <p className="marginLower">Your price is above average!: </p>
+        <p className="marginHigher above"> {equityGain}% </p>
         </div>)}
     else if (p < s){
       result = (
-        <div className="marginLower">
-          <p>Your margin is less than the average for this area </p>
+        <div>
+          <p className="marginLower">You are below average!</p>
+          <p className="marginHigher below"> {equityGain}% </p>
         </div> )
     }
 
