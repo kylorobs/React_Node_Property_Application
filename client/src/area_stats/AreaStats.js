@@ -45,9 +45,9 @@ class AreaStats extends React.Component{
   }
 
   findAverage(array){
-    if (!array){
+    if (!array || array.length < 2){
       console.log("No array provided");
-      return
+      return "No data"
     }
 
     else if (array === 0){
@@ -69,7 +69,7 @@ class AreaStats extends React.Component{
       return item.beds === beds;
     })
 
-    if (!findBeds){
+    if (!findBeds || !data){
       return "No data!"
     }
 
@@ -80,11 +80,19 @@ class AreaStats extends React.Component{
       bedsPrices = bedsArray.map((item, index) => {
         if (item.sale_price && typeof item.sale_price === 'number' &&  !Number.isNaN(item.sale_price))
         {
-          return item.sale_price;}
+          console.log("current test sale")
+          console.log(item.sale_price)
+          return item.sale_price;
+        }
+        else {
+          return "No data"
+        }
       })
     }
     else if (data === this.state.rents){
       bedsPrices = bedsArray.map((item, index) => {
+        console.log("current test rent")
+        console.log(item.price_per_month)
             return item.price_per_month
       })
     }
@@ -94,7 +102,13 @@ class AreaStats extends React.Component{
     }
 
     bedsPrices = bedsPrices.filter(Boolean)  // REMOVE EMPTY ITEMS IN ARRAY
-    return Math.floor(this.findAverage(bedsPrices));
+    let avResult = Math.floor(this.findAverage(bedsPrices));
+    if(avResult){
+      return avResult
+    }
+    else {
+      return "No data"
+    }
   }
 
 
@@ -121,9 +135,7 @@ class AreaStats extends React.Component{
     let rents = this.state.rents;
     let message = "calculating...";
     let postcode = decodeURIComponent(this.props.postcode);
-    console.log(this.props.postcode)
-    console.log("and now decoded")
-    console.log(postcode)
+
 
     let onebedsale = message;
     let onebedrent = message;
@@ -156,7 +168,7 @@ class AreaStats extends React.Component{
           <h4> <span className="teal"> Property type:</span> {this.props.type}</h4>
           <h4><span className="teal"> Postcode:</span> {postcode} </h4>
           <div className="info-table">
-          <span className="pink"> Calcuated averages </span>
+          <span className="pink"><strong> Calcuated averages </strong></span>
           <table>
           <tr>
             <th>Beds</th>
