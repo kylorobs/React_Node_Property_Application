@@ -8,7 +8,7 @@ class CityPicker extends React.Component{
   constructor(props){
     super(props)
     this.state= {
-      selectedCity: 'bournemouth',
+      selectedCity: 'Choose a city',
       selectedPostCode : 'BH1%201QF',
       selectedType: 'flat',
       filterBox: false,
@@ -24,7 +24,7 @@ class CityPicker extends React.Component{
   }
 
   onTypeChange(type){
-    this.setState({currentType : type})
+    this.setState({selectedType : type})
   }
 
   onCityChange(city){
@@ -52,8 +52,9 @@ class CityPicker extends React.Component{
 
   cityPicker(e){
 console.log(e.target.id)
-let input = document.getElementById('postcode-input');
-input.value = ' ';
+let allInputs = document.querySelectorAll('input');
+allInputs.forEach(input => input.value =' ')
+
 let typeCurrentlySelected = document.querySelectorAll('li');
 typeCurrentlySelected.forEach(i => {
   i.classList.remove('typeSelected')
@@ -64,6 +65,12 @@ typeCurrentlySelected.forEach(i => {
 let selectedCity = e.target.id
   this.setState({selectedCity: selectedCity,
                 filterBox: true});
+
+  let citySelect = document.getElementById('citySelector');
+  // console.log("city selected is: ")
+  citySelect.value = selectedCity;
+  console.log("city selected is" + citySelect.value)
+  // citySelect.selectedIndex = selectedCity;
   }
 
 

@@ -15,8 +15,10 @@ class NewChart extends React.Component{
 
   createChart(){
     let url = `/api/city-data/${this.props.city}/${this.props.type}/${this.props.postcode}`;
-    console.log("Chart fetch URL: " + url)
-    console.log("Chart fetch URL: " + this.props.type)
+    console.log("Chart fetch URL: ")
+    console.log(url)
+    console.log("Chart fetch URL: ")
+    console.log(this.props.type)
 
     fetch(url)
     .then(res => res.json()).then(results => {
@@ -56,7 +58,7 @@ class NewChart extends React.Component{
 
 
       componentDidUpdate(prevProps, prevState){
-        if (prevProps.city !== this.props.city){
+        if (prevProps.city !== this.props.city  || prevProps.postcode !== this.props.postcode){
         this.createChart();
       }
 

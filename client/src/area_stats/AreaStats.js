@@ -120,7 +120,10 @@ class AreaStats extends React.Component{
     let sales = this.state.sales;
     let rents = this.state.rents;
     let message = "calculating...";
-    let postcode = decodeURIComponent(this.state.postcode)
+    let postcode = decodeURIComponent(this.props.postcode);
+    console.log(this.props.postcode)
+    console.log("and now decoded")
+    console.log(postcode)
 
     let onebedsale = message;
     let onebedrent = message;
@@ -150,7 +153,7 @@ class AreaStats extends React.Component{
     return (
         <div>
           <h2 className="teal"> {this.props.city} </h2>
-          <h4> <span className="teal"> Property type: {this.props.type} </span></h4>
+          <h4> <span className="teal"> Property type:</span> {this.props.type}</h4>
           <h4><span className="teal"> Postcode:</span> {postcode} </h4>
           <div className="info-table">
           <span className="pink"> Calcuated averages </span>

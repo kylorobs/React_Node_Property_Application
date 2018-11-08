@@ -22,8 +22,6 @@ const azunaKey = process.env.AZUNA_KEY;
 var promise = mongoose.connect(myLocalDb);
 
 
-//app.use('/client', express.static('public'));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));

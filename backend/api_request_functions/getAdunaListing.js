@@ -20,6 +20,9 @@ function getAdunaListing(city, category, type, postcode){
     case "terraced":
       type = 'house_terraced'
     break;
+    case "semi-detached":
+      type = 'house_semi'
+    break;
     default:
     type="undefined"
   }

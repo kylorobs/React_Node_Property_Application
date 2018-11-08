@@ -4,7 +4,7 @@ const Submit = (props) => {
 
   let button = <div></div>
   if(props.ready){
-      button = <button onClick={props.submit}> Let's analyse the area </button>
+      button = <a className="button" onClick={props.submit}> Let's analyse the area </a>
   }
 
     return button

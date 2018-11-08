@@ -12,8 +12,9 @@ class Filter extends React.Component{
   }
 
   onSelectorChange(e){
-    let input = document.getElementById('postcode-input');
-    input.value = ' ';
+    let allInputs = document.querySelectorAll('input');
+    allInputs.forEach(input => {input.value = ' '})
+
     let typeCurrentlySelected = document.querySelectorAll('li');
     typeCurrentlySelected.forEach(i => {
       i.classList.remove('typeSelected')
@@ -54,7 +55,7 @@ class Filter extends React.Component{
       let result = (!this.props.filter) ? <div className="filterBoxOff"></div> :
       (<div className={styleName}>
         <span className="heading"> Your chosen city:  </span>
-        <select onChange={this.onSelectorChange}>
+        <select id="citySelector" onChange={this.onSelectorChange}>
           <option value="bournemouth">Bournemouth</option>
           <option value="bristol">Bristol</option>
             <option value="ipswich">Ipswich</option>

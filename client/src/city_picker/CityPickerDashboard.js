@@ -49,8 +49,10 @@ class CityPickerDashboard extends React.Component{
 
   cityPicker(e){
     console.log(e.target.id)
-    let input = document.getElementById('postcode-input');
-    input.value = ' ';
+    let target = e.target.id
+    let allInputs = document.querySelectorAll('input');
+    allInputs.forEach(input => input.value =' ')
+
     let typeCurrentlySelected = document.querySelectorAll('li');
     typeCurrentlySelected.forEach(i => {
       i.classList.remove('typeSelected')
